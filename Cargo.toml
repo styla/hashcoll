@@ -1,0 +1,25 @@
+[package]
+name = "hashcoll-fast"
+version = "0.1.0"
+authors = ["Kenan Sulayman <kenan@sig.dev>"]
+edition = "2018"
+repository = "https://github.com/styladev/hashcoll-fast"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wee_alloc = "0.4.5"
+wasm-bindgen = "0.2.58"
+hashbrown = "0.7.0"
+
+[profile]
+
+[profile.release]
+codegen-units = 1
+debug = false
+debug-assertions = false
+lto = true
+opt-level = 3
+panic = "abort"
+rpath = false
