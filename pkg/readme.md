@@ -8,7 +8,9 @@ Fast hashset and hashmap implementation, written in Rust and compiled to Webasse
 $ yarn add hashcoll-fast
 ```
 
-#### HashSet
+#### String
+
+##### `HashSet<String>`
 
 ```javascript
 const HashSet = require("hashcoll-fast").HashSet;
@@ -24,20 +26,57 @@ set.contains('tree'); // false
 set.remove('foo');
 ```
 
-#### HashMap
+##### `HashMap<String, String>`
 
 ```javascript
 const HashMap = require("hashcoll-fast").HashMap;
 
 const map = new HashMap(4);
 
-set.insert('foo', 'bar');
-set.insert('tree', 'house');
+map.insert('foo', 'bar');
+map.insert('tree', 'house');
 
-set.contains('foo'); // true
-set.contains('zig'); // false
+map.contains('foo'); // true
+map.contains('zig'); // false
 
-set.remove('foo'); // 'bar'
+map.remove('foo'); // 'bar'
+```
+
+#### `Vec<u8>`
+
+##### `HashSetRaw<Vec<u8>>`
+
+```javascript
+const HashSetRaw = require("./pkg").HashSetRaw;
+
+const set = new HashSetRaw(4);
+
+set.insert(Buffer.from('foo'));
+set.insert(Buffer.from('bar'));
+
+set.contains(Buffer.from('foo')); // true
+set.contains(Buffer.from('tree')); // false
+
+set.remove(Buffer.from('foo')); // Uint8Array(3) [ 102, 111, 111 ]
+```
+
+##### `HashMap<String, Vec<u8>>`
+
+```javascript
+const HashMapRaw = require("hashcoll-fast").HashMap;
+
+const map = new HashMapRaw(4);
+
+map.insert('foo', Buffer.from('bar'));
+map.insert('tree', Buffer.from('house'));
+
+map.get('foo'); // // Uint8Array(3) [ 102, 111, 111 ]
+map.get('trexe'); // undefined
+
+map.contains('foo'); // true
+map.contains('zig'); // false
+
+map.remove('foo'); // Uint8Array(3) [ 102, 111, 111 ]
 ```
 
 ### Build
@@ -45,4 +84,3 @@ set.remove('foo'); // 'bar'
 ```sh
 $ make
 ```
-

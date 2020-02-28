@@ -44,15 +44,15 @@ function getInt32Memory0() {
     return cachegetInt32Memory0;
 }
 
-function getArrayU8FromWasm0(ptr, len) {
-    return getUint8Memory0().subarray(ptr / 1, ptr / 1 + len);
-}
-
 function passArray8ToWasm0(arg, malloc) {
     const ptr = malloc(arg.length * 1);
     getUint8Memory0().set(arg, ptr / 1);
     WASM_VECTOR_LEN = arg.length;
     return ptr;
+}
+
+function getArrayU8FromWasm0(ptr, len) {
+    return getUint8Memory0().subarray(ptr / 1, ptr / 1 + len);
 }
 /**
 */
@@ -406,9 +406,115 @@ class HashSet {
     }
 }
 module.exports.HashSet = HashSet;
+/**
+*/
+class HashSetRaw {
+
+    static __wrap(ptr) {
+        const obj = Object.create(HashSetRaw.prototype);
+        obj.ptr = ptr;
+
+        return obj;
+    }
+
+    free() {
+        const ptr = this.ptr;
+        this.ptr = 0;
+
+        wasm.__wbg_hashsetraw_free(ptr);
+    }
+    /**
+    */
+    constructor() {
+        var ret = wasm.hashmap_new();
+        return HashSetRaw.__wrap(ret);
+    }
+    /**
+    * @param {number} capacity
+    * @returns {HashSetRaw}
+    */
+    static with_capacity(capacity) {
+        var ret = wasm.hashsetraw_with_capacity(capacity);
+        return HashSetRaw.__wrap(ret);
+    }
+    /**
+    * @param {Uint8Array} value
+    * @returns {boolean}
+    */
+    remove(value) {
+        var ptr0 = passArray8ToWasm0(value, wasm.__wbindgen_malloc);
+        var len0 = WASM_VECTOR_LEN;
+        var ret = wasm.hashsetraw_remove(this.ptr, ptr0, len0);
+        return ret !== 0;
+    }
+    /**
+    * @param {Uint8Array} value
+    * @returns {boolean}
+    */
+    insert(value) {
+        var ptr0 = passArray8ToWasm0(value, wasm.__wbindgen_malloc);
+        var len0 = WASM_VECTOR_LEN;
+        var ret = wasm.hashsetraw_insert(this.ptr, ptr0, len0);
+        return ret !== 0;
+    }
+    /**
+    * @param {Uint8Array} value
+    * @returns {boolean}
+    */
+    contains(value) {
+        var ptr0 = passArray8ToWasm0(value, wasm.__wbindgen_malloc);
+        var len0 = WASM_VECTOR_LEN;
+        var ret = wasm.hashsetraw_contains(this.ptr, ptr0, len0);
+        return ret !== 0;
+    }
+    /**
+    * @param {Uint8Array} value
+    * @returns {Uint8Array | undefined}
+    */
+    get(value) {
+        var ptr0 = passArray8ToWasm0(value, wasm.__wbindgen_malloc);
+        var len0 = WASM_VECTOR_LEN;
+        wasm.hashsetraw_get(8, this.ptr, ptr0, len0);
+        var r0 = getInt32Memory0()[8 / 4 + 0];
+        var r1 = getInt32Memory0()[8 / 4 + 1];
+        let v1;
+        if (r0 !== 0) {
+            v1 = getArrayU8FromWasm0(r0, r1).slice();
+            wasm.__wbindgen_free(r0, r1 * 1);
+        }
+        return v1;
+    }
+    /**
+    * @returns {number}
+    */
+    len() {
+        var ret = wasm.hashmap_len(this.ptr);
+        return ret >>> 0;
+    }
+    /**
+    * @returns {boolean}
+    */
+    is_empty() {
+        var ret = wasm.hashmap_is_empty(this.ptr);
+        return ret !== 0;
+    }
+    /**
+    */
+    clear() {
+        wasm.hashsetraw_clear(this.ptr);
+    }
+    /**
+    * @returns {number}
+    */
+    capacity() {
+        var ret = wasm.hashmap_capacity(this.ptr);
+        return ret >>> 0;
+    }
+}
+module.exports.HashSetRaw = HashSetRaw;
 
 module.exports.__wbindgen_throw = function(arg0, arg1) {
     throw new Error(getStringFromWasm0(arg0, arg1));
 };
-wasm = require('./hashset_fast_bg');
+wasm = require('./hashcoll_fast_bg');
 

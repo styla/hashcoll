@@ -14,7 +14,7 @@ use alloc::string::String;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
-struct HashSet {
+pub struct HashSet {
     set: hashbrown::HashSet<String>,
 }
 
@@ -66,7 +66,59 @@ impl HashSet {
 }
 
 #[wasm_bindgen]
-struct HashMap {
+pub struct HashSetRaw {
+    set: hashbrown::HashSet<Vec<u8>>,
+}
+
+#[wasm_bindgen]
+impl HashSetRaw {
+    #[wasm_bindgen(constructor)]
+    pub fn new() -> HashSetRaw {
+        HashSetRaw {
+            set: hashbrown::HashSet::new(),
+        }
+    }
+
+    pub fn with_capacity(capacity: u32) -> HashSetRaw {
+        HashSetRaw {
+            set: hashbrown::HashSet::with_capacity(
+                capacity as usize,
+            ),
+        }
+    }
+
+    pub fn remove(&mut self, value: Vec<u8>) -> bool {
+        self.set.remove(&*value)
+    }
+
+    pub fn insert(&mut self, value: Vec<u8>) -> bool {
+        self.set.insert(value)
+    }
+
+    pub fn contains(&self, value: Vec<u8>) -> bool {
+        self.set.contains(&*value)
+    }
+
+    pub fn get(&self, value: Vec<u8>) -> Option<Vec<u8>> {
+        self.set.get(&*value).cloned()
+    }
+
+    pub fn len(&self) -> usize {
+        self.set.len()
+    }
+    pub fn is_empty(&self) -> bool {
+        self.set.is_empty()
+    }
+    pub fn clear(&mut self) {
+        self.set.clear()
+    }
+    pub fn capacity(&self) -> usize {
+        self.set.capacity()
+    }
+}
+
+#[wasm_bindgen]
+pub struct HashMap {
     map: hashbrown::HashMap<String, String>,
 }
 
@@ -118,7 +170,7 @@ impl HashMap {
 }
 
 #[wasm_bindgen]
-struct HashMapRaw {
+pub struct HashMapRaw {
     map: hashbrown::HashMap<String, Vec<u8>>,
 }
 

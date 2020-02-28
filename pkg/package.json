@@ -3,14 +3,17 @@
   "collaborators": [
     "Kenan Sulayman <kenan@sig.dev>"
   ],
-  "repository": "https://github.com/styladev/hashcoll-fast",
-  "version": "1.0.2",
+  "version": "1.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/styladev/hashcoll-fast"
+  },
   "files": [
-    "hashset_fast_bg.wasm",
-    "hashset_fast.js",
-    "hashset_fast_bg.js",
-    "hashset_fast.d.ts"
+    "hashcoll_fast_bg.wasm",
+    "hashcoll_fast.js",
+    "hashcoll_fast_bg.js",
+    "hashcoll_fast.d.ts"
   ],
-  "main": "hashset_fast.js",
-  "types": "hashset_fast.d.ts"
+  "main": "hashcoll_fast.js",
+  "types": "hashcoll_fast.d.ts"
 }
