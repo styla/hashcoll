@@ -1,11 +1,11 @@
-# hashcoll-fast
+# hashcoll
 
 Fast hashset and hashmap implementation, written in Rust and compiled to Webassembly, based on hashbrown, a Rust port of Google's high-performance SwissTable hash map. 
 
 ### Usage
 
 ```sh
-$ yarn add hashcoll-fast
+$ yarn add hashcoll
 ```
 
 #### String
@@ -13,7 +13,7 @@ $ yarn add hashcoll-fast
 ##### `HashSet<String>`
 
 ```javascript
-const HashSet = require("hashcoll-fast").HashSet;
+const HashSet = require("hashcoll").HashSet;
 
 const set = new HashSet(4);
 
@@ -29,7 +29,7 @@ set.remove('foo');
 ##### `HashMap<String, String>`
 
 ```javascript
-const HashMap = require("hashcoll-fast").HashMap;
+const HashMap = require("hashcoll").HashMap;
 
 const map = new HashMap(4);
 
@@ -47,7 +47,7 @@ map.remove('foo'); // 'bar'
 ##### `HashSetRaw<Vec<u8>>`
 
 ```javascript
-const HashSetRaw = require("./pkg").HashSetRaw;
+const HashSetRaw = require("hashcoll").HashSetRaw;
 
 const set = new HashSetRaw(4);
 
@@ -63,7 +63,7 @@ set.remove(Buffer.from('foo')); // Uint8Array(3) [ 102, 111, 111 ]
 ##### `HashMap<String, Vec<u8>>`
 
 ```javascript
-const HashMapRaw = require("hashcoll-fast").HashMap;
+const HashMapRaw = require("hashcoll").HashMap;
 
 const map = new HashMapRaw(4);
 

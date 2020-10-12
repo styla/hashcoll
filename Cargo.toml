@@ -1,17 +1,20 @@
 [package]
-name = "hashcoll-fast"
+name = "hashcoll"
 version = "1.1.0"
 authors = ["Kenan Sulayman <kenan@sig.dev>"]
 edition = "2018"
-repository = "https://github.com/styladev/hashcoll-fast"
+repository = "https://github.com/styla/hashcoll"
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = ["-Oz", "--enable-mutable-globals"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 wee_alloc = "0.4.5"
-wasm-bindgen = "0.2.58"
-hashbrown = "0.7.0"
+wasm-bindgen = "0.2.68"
+hashbrown = "0.9.1"
 
 [profile]
 

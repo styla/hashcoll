@@ -1,12 +1,12 @@
 {
-  "name": "hashcoll-fast",
+  "name": "hashcoll",
   "collaborators": [
     "Kenan Sulayman <kenan@sig.dev>"
   ],
-  "version": "1.1.0",
+  "version": "1.2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/styladev/hashcoll-fast"
+    "url": "https://github.com/styla/hashcoll"
   },
   "files": [
     "hashcoll_fast_bg.wasm",
